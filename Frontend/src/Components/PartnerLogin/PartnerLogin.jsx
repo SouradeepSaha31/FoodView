@@ -23,7 +23,7 @@ export default function PartnerLogin(){
         }
 		console.log(data)
         try {
-            const response = await baseUrl.post('/api/foodpartner/login', data);
+            const response = await baseUrl.post('/api/foodpartner/login', data, {withCredentials: true});
             console.log(response.data)
             navigate("/partner-profile");
         } catch (error) {

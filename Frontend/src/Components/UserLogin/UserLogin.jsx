@@ -24,7 +24,7 @@ export default function UserLogin(){
         }
 		console.log(data)
         try {
-            const response = await baseUrl.post('/api/user/login', data);
+            const response = await baseUrl.post('/api/user/login', data, {withCredentials: true});
             console.log(response.data)
             navigate("/food-reels");
         } catch (error) {

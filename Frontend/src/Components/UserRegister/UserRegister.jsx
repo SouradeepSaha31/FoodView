@@ -31,7 +31,7 @@ export default function UserRegister() {
             password: e.target.password.value
         }
         try {
-            const response = await baseUrl.post('/api/user/register', data);
+            const response = await baseUrl.post('/api/user/register', data, {withCredentials: true});
             console.log(response.data)
         } catch (error) {
             console.log("error in handle submit in user register")

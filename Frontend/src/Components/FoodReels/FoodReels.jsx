@@ -13,7 +13,7 @@ function FoodReels() {
     useEffect(() => {
         const fetchfoods = async () => {
             try {
-                const response = await baseUrl.get("/api/food/getfood");
+                const response = await baseUrl.get("/api/food/getfood", {withCredentials: true});
                 setFoods(response.data.foods);
             } catch (error) {
                 console.log(error.response.data.message);

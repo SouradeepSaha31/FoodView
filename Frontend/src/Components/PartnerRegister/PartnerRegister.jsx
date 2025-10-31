@@ -47,7 +47,7 @@ export default function PartnerRegister() {
         }
 		    console.log(data)
         try {
-            const response = await baseUrl.post('/api/foodpartner/register', data);
+            const response = await baseUrl.post('/api/foodpartner/register', data, {withCredentials: true});
             console.log(response)
         } catch (error) {
             console.log("error in handle submit in food partner register")
