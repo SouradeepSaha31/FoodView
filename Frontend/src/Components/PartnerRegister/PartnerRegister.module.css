@@ -1,0 +1,230 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== Wrapper Section ===== */
+.wraper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #f0f0f0;
+  padding: 15px;
+  overflow-y: auto;
+  /* overflow-x: hidden; */
+}
+
+/* ===== Card Section ===== */
+.card {
+  background: #fff;
+  width: 480px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  text-align: center;
+}
+
+/* ===== Heading ===== */
+.text {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ===== Form Row ===== */
+.row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  text-align: left;
+  /* border: 2px solid blue; */
+}
+
+/* ===== Label ===== */
+.label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* ===== Input ===== */
+.input {
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: #4a90e2;
+}
+
+/* ===== Row Group for Side-by-Side Inputs ===== */
+.rowgroup {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 0px;
+  /* flex-direction: column; */
+  /* border: 2px solid green; */
+}
+
+.rowgroup .half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Actions Section ===== */
+.actions {
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #357ab8;
+}
+
+/* ===== Footer Text ===== */
+h4 {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+h4 a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+h4 a:hover {
+  text-decoration: underline;
+}
+/* ======= password protection ======== */
+.passwordprotection {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 12px 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.passwordlabel {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.rule input[type="checkbox"] {
+  accent-color: #4a90e2;
+}
+
+/* ===== Responsive Design ===== */
+
+/* Tablet View */
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .text {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 586px) {
+  .rowgroup {
+    flex-direction: column;
+    gap: 0px;
+  }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+  .wraper {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .card {
+    padding: 20px;
+  }
+
+  .text {
+    font-size: 1.2rem;
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .input {
+    font-size: 0.95rem;
+    padding: 8px 10px;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 9px 15px;
+  }
+
+  h4 {
+    font-size: 0.85rem;
+  }
+
+    .passwordprotection {
+    padding: 10px;
+  }
+
+  .passwordlabel {
+    font-size: 0.9rem;
+  }
+
+  .rule {
+    font-size: 0.85rem;
+  }
+}

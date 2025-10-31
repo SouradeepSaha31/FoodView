@@ -1,0 +1,208 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== Wrapper Section ===== */
+.wraper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f6fa;
+  padding: 20px;
+}
+
+/* ===== Card Section ===== */
+.card {
+  background: #fff;
+  width: 400px;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+}
+
+/* ===== Heading ===== */
+.text {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ===== Form Row ===== */
+.row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* ===== Label ===== */
+.label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* ===== Input ===== */
+.input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: #4a90e2;
+}
+
+/* ===== Actions Section ===== */
+.actions {
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #357ab8;
+}
+
+/* ===== Footer Text ===== */
+h4 {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+h4 a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+h4 a:hover {
+  text-decoration: underline;
+}
+/* ======= password protection ======== */
+.passwordprotection {
+  margin-top: 15px;
+  padding: 12px 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.passwordlabel {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.rule input[type="checkbox"] {
+  accent-color: #4a90e2; /* gives the checkbox a nice blue color */
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .passwordprotection {
+    padding: 10px;
+  }
+
+  .passwordlabel {
+    font-size: 0.9rem;
+  }
+
+  .rule {
+    font-size: 0.85rem;
+  }
+}
+
+
+/* ===== Responsive Design ===== */
+
+/* Tablet View */
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .text {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+  .wraper {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .card {
+    padding: 20px;
+  }
+
+  .text {
+    font-size: 1.2rem;
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .input {
+    font-size: 0.95rem;
+    padding: 8px 10px;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 9px 15px;
+  }
+
+  h4 {
+    font-size: 0.85rem;
+  }
+}

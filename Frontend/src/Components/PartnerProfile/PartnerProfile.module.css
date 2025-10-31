@@ -1,0 +1,370 @@
+/* Container */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Header & Navigation */
+.header {
+    background-color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.navLinks {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navLinks a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navLinks a:hover,
+.navLinks a.active {
+    color: #4CAF50;
+}
+
+.menuIcon {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.menuIcon span {
+    width: 25px;
+    height: 2px;
+    background-color: #333;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.heroSection {
+    background-color: white;
+    margin-bottom: 2rem;
+}
+
+.banner {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profileInfo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.profileImage {
+    position: relative;
+}
+
+.profileImage img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.businessInfo h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.businessInfo p {
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+.editButton {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.editButton:hover {
+    background-color: #45a049;
+}
+
+/* Main Content */
+.mainContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-bottom: 1rem;
+    background-color: blue;
+}
+
+.mainContent h2 {
+    margin-bottom: 2rem;
+    color: #333;
+    background-color: blueviolet;
+}
+
+.videoGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.videoCard {
+    position: relative;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+    aspect-ratio: 9/16;
+}
+
+/* .videoCard:hover {
+    transform: translateY(-5px);
+} */
+
+/* .thumbnail {
+    position: relative;
+    width: 100%;
+    height: 100%;
+} */
+
+/* .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} */
+
+.reelVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  background: black;
+  display: block;
+}
+
+/* .playButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+} */
+
+/* .videoCard:hover .playButton {
+    opacity: 1;
+} */
+
+/* .playButton::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    border-left: 15px solid #4CAF50;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+} */
+
+.videoInfo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.duration, .views {
+    background-color: rgba(0,0,0,0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+/* .videoOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(transparent 60%, rgba(0,0,0,0.8));
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    transition: opacity 0.3s;
+} */
+
+/* .videoCard:hover .videoOverlay {
+    opacity: 1;
+} */
+
+/* .videoOverlay h3 {
+    color: white;
+    margin-bottom: 8px;
+    font-size: 1rem;
+} */
+
+/* .videoOverlay p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+} */
+
+/* Responsive adjustments for video grid */
+@media (max-width: 1024px) {
+    .videoGrid {
+        padding: 0 1rem;
+        padding-bottom: 1rem;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .videoGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .videoGrid {
+        grid-template-columns: repeat(1, 1fr);
+        max-width: 350px;
+    }
+    
+    .videoCard {
+        max-width: 100%;
+    }
+}
+
+.loadMore {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.8rem 2rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loadMore:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .profileInfo {
+        padding: 1.5rem;
+    }
+    
+    .videoGrid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    .mainContent {
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+    }
+    
+    .menuIcon {
+        display: flex;
+    }
+    
+    .profileInfo {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .businessInfo h1 {
+        font-size: 1.5rem;
+    }
+    
+    .mainContent {
+        padding: 0 1rem;
+    }
+    
+    .videoGrid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 1rem;
+    }
+    
+    .profileImage img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .businessInfo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .videoGrid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
