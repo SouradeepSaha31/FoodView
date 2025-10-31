@@ -15,6 +15,11 @@ function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/normal" element={
+          <>
+            <h1>hello</h1>
+          </>
+        } />
         <Route path="/user-register" element={<UserRegister/>} />
         <Route path="/user-login" element={<UserLogin />} />
         <Route path="/partner-register" element={<PartnerRegister />} />
