@@ -135,7 +135,7 @@ const logout = async (req, res) => {
         // find user
         const user = await userModel.findOne({_id : req.user._id})
         // clear cookie and token
-        res.clearCookie("token")
+        res.clearCookie("token", {httpOnly : true, secure : true, sameSite : "none"})
         user.token = null
         user.save()
         console.log("logout sucessfull")

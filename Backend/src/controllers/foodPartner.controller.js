@@ -143,7 +143,7 @@ const logout = async (req, res) => {
 
         const user = await foodPartnerModel.findOne({_id : req.user._id})
         // clearing token
-        res.clearCookie("token")
+        res.clearCookie("token", {httpOnly : true, secure : true, sameSite : "none"})
         user.token = null
         user.save()
         // sending response
