@@ -9,7 +9,7 @@ function ProtectedRoute({Component}) {
             try {
                 const response = await baseUrl.get("/api/protected", {withCredentials : true});
                 console.log(response.data.message)
-                console.log(Component.name)
+                console.log(Component.name, Component)
                 setMessage(response.data.message);
             } catch (error) {
                 console.log(error)
