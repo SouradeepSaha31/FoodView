@@ -4,14 +4,6 @@ import userModel from '../models/user.model.js';
 import foodPartnerModel from '../models/foodPartner.model.js';
 const protectedRouter = Router();
 
-// protectedRouter.route('/isloggedin').get((req, res) => {
-//   const token = req.cookies.token;
-//   if (token) {
-//     return res.status(200).json({ loggedIn: true });
-//   } else {
-//     return res.status(200).json({ loggedIn: false });
-//   }
-// });
 protectedRouter.route('/').get(async (req, res) => {
   const token = req.cookies.token;
   if (token) {
@@ -38,8 +30,5 @@ protectedRouter.route('/').get(async (req, res) => {
       } });
   }
 });
-// protectedRouter.route('/isfoodpartner').get((req, res) => {
-  
-// });
 
 export default protectedRouter;

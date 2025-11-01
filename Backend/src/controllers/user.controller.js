@@ -106,6 +106,7 @@ const login = async (req, res) => {
         res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none"})
         isUserFound.token = token
         isUserFound.save()
+        console.log(token)
 
         // response
 
