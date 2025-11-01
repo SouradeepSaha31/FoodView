@@ -1,9 +1,10 @@
 import React, {use, useState} from 'react'
 import styles from "./UserRegister.module.css"
 import baseUrl from "../../BaseUrl/BaseUrl.js"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 export default function UserRegister() {
+    const navigate = useNavigate();
     let [passwordConditaion, setPasswordCondition] = useState({
         minChar : false,
         upperCase : false,
@@ -21,7 +22,7 @@ export default function UserRegister() {
             alert("Email is required.");
             return;
         }
-        if (!rules.minChar || !rules.upperCase || !rules.lowerCase || !rules.specialChar) {
+        if (!passwordConditaion.minChar || !passwordConditaion.upperCase || !passwordConditaion.lowerCase || !passwordConditaion.specialChar) {
             alert("Password does not meet all the requirements.");
             return;
         }
@@ -33,6 +34,7 @@ export default function UserRegister() {
         try {
             const response = await baseUrl.post('/api/user/register', data, {withCredentials: true});
             console.log(response.data)
+            navigate("/food-reels");
         } catch (error) {
             console.log("error in handle submit in user register")
             alert(error.response.data.message)

@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import baseUrl from "../../BaseUrl/BaseUrl.js";
 import styles from "./PartnerRegister.module.css";
 
 export default function PartnerRegister() {
+    const navigate = useNavigate();
 	  let [passwordConditaion, setPasswordCondition] = useState({
 		minChar: false,	
 		upperCase: false,
@@ -29,7 +30,7 @@ export default function PartnerRegister() {
             alert("Email is required.");
             return;
         }
-        if (!rules.minChar || !rules.upperCase || !rules.lowerCase || !rules.specialChar) {
+        if (!passwordConditaion.minChar || !passwordConditaion.upperCase || !passwordConditaion.lowerCase || !passwordConditaion.specialChar) {
 			alert("Password does not meet all the requirements.");
             return;
         }
@@ -49,6 +50,7 @@ export default function PartnerRegister() {
         try {
             const response = await baseUrl.post('/api/foodpartner/register', data, {withCredentials: true});
             console.log(response)
+            navigate("/partner-profile");
         } catch (error) {
             console.log("error in handle submit in food partner register")
 			      console.log(error)

@@ -61,8 +61,6 @@ const register = async (req, res) => {
 
         const token = jwt.sign({_id : user._id, email : user.email}, process.env.TOKEN_CODE)
         res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none"})
-        user.token = token
-        user.save()
 
         // sending response
 
@@ -114,8 +112,6 @@ const login = async (req, res) => {
 
         const token = jwt.sign({_id : isUserFound._id, email : isUserFound.email}, process.env.TOKEN_CODE)
         res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none"})
-        isUserFound.token = token
-        isUserFound.save()
 
         // sending response
 
@@ -139,13 +135,10 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
     try {
 
-        // finding user
 
-        const user = await foodPartnerModel.findOne({_id : req.user._id})
         // clearing token
         res.clearCookie("token", {httpOnly : true, secure : true, sameSite : "none"})
-        user.token = null
-        user.save()
+
         // sending response
         res.status(201).json({message : "user logout successfully"})
 

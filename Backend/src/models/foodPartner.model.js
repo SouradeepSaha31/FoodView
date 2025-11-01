@@ -27,9 +27,6 @@ const foodPartnerSchema = new mongoose.Schema({
     address : {
         type : String,
         required : true,
-    },
-    token : {
-        type : String,
     }
 },{
     timestamps : true

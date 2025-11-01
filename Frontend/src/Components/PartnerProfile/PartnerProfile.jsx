@@ -8,7 +8,7 @@ function PartnerProfile() {
   let [playvideo, setPlayvideo] = useState();
 
   let [foods, setFoods] = useState([
-    "https://ik.imagekit.io/souradeep314/foodview-foodvideos/5cd3e9da-da66-43a4-8ec2-7d1e0f2521a0_IA4vi013x4"
+    "https://ik.imagekit.io/souradeep314/foodview-foodvideos/11cc8917-977c-438e-9f3a-7bfbb9d3f7f4_ZZUdjFwol"
   ]);
 
   const handleLogout = async (e) => {

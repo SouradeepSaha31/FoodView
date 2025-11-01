@@ -13,11 +13,6 @@ const userSchema =  new mongoose.Schema({
     password : {
         type : String,
         required : true
-    },
-    token : {
-        type : String,
-        require : true,
-        unique : true,
     }
 },{
     timestamps : true

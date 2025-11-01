@@ -55,8 +55,6 @@ const register = async (req, res) => {
 
         const token = jwt.sign({_id : user._id, email : user.email}, process.env.TOKEN_CODE)
         res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none"})
-        user.token = token
-        user.save()
 
         // response
 
@@ -104,8 +102,6 @@ const login = async (req, res) => {
 
         const token = jwt.sign({_id : isUserFound._id, email : isUserFound.email}, process.env.TOKEN_CODE)
         res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none"})
-        isUserFound.token = token
-        isUserFound.save()
         console.log(token)
 
         // response
@@ -132,12 +128,8 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
     try {
 
-        // find user
-        const user = await userModel.findOne({_id : req.user._id})
         // clear cookie and token
         res.clearCookie("token", {httpOnly : true, secure : true, sameSite : "none"})
-        user.token = null
-        user.save()
         console.log("logout sucessfull")
         // response
         res.status(201).json({message : "user logout successfully"})
