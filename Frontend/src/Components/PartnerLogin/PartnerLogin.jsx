@@ -56,7 +56,7 @@ export default function PartnerLogin(){
 
                 </form>
 
-                <h4>Nwe Here ? <Link to="/food-partner-register">Register</Link></h4>
+                <h4>New Here ? <Link to="/partner-register">Register</Link></h4>
 
             </div>
             

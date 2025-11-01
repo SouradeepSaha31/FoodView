@@ -136,7 +136,7 @@ export default function PartnerRegister() {
         </form>
 
         <h4>
-          Already have an account? <Link to="/food-partner-login">Log in</Link>
+          Already have an account? <Link to="/partner-login">Log in</Link>
         </h4>
       </div>
     </div>
