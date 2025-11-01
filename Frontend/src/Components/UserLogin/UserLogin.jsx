@@ -25,7 +25,7 @@ export default function UserLogin(){
 		console.log(data)
         try {
             const response = await baseUrl.post('/api/user/login', data, {withCredentials: true});
-            console.log(response.data)
+            console.log(response.data.user)
             navigate("/food-reels");
         } catch (error) {
             console.log("error in handle submit in user login")

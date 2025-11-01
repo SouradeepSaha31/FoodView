@@ -114,7 +114,9 @@ const login = async (req, res) => {
             message : "user login successfully", 
             user : {
                 fullname : isUserFound.fullname,
-                email : isUserFound.email
+                email : isUserFound.email,
+                token,
+                usertoken : isUserFound.token
             }
         })
 
@@ -136,6 +138,7 @@ const logout = async (req, res) => {
         res.clearCookie("token")
         user.token = null
         user.save()
+        console.log("logout sucessfull")
         // response
         res.status(201).json({message : "user logout successfully"})
 

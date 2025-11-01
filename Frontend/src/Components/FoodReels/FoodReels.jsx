@@ -46,7 +46,8 @@ function FoodReels() {
 
     const handleLogout = async (e) => {
         try {
-            await baseUrl.get("/api/user/logout", { withCredentials: true });
+            const response = await baseUrl.get("/api/user/logout", { withCredentials: true });
+            alert(response.data.message);
             navigate("/user-login");
         } catch (error) {
             console.log(error);
