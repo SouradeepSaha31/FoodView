@@ -24,8 +24,8 @@ function AppRouter() {
         <Route path="/user-login" element={<UserLogin />} />
         <Route path="/partner-register" element={<PartnerRegister />} />
         <Route path="/partner-login" element={<PartnerLogin />} />
-        <Route path="/food-reels" element={<ProtectedRoute Component={FoodReels} />} />
-        <Route path="/partner-profile" element={<ProtectedRoute Component={PartnerProfile} />} />
+        <Route path="/food-reels" element={<ProtectedRoute Component={FoodReels} PageName = "foodreels" />} />
+        <Route path="/partner-profile" element={<ProtectedRoute Component={PartnerProfile} PageName = "partnerprofile" />} />
       </Routes>
     </BrowserRouter>
   )

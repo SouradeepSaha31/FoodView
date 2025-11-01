@@ -8,9 +8,7 @@ function PartnerProfile() {
   let [playvideo, setPlayvideo] = useState();
 
   let [foods, setFoods] = useState([
-    "https://ik.imagekit.io/souradeep314/foodview-foodvideos/68fe0360ba4aad59d8fbab3c--37e93aed-7fa9-461a-8f11-cbc2ee70ae8e_soBxpa08k",
-    "https://ik.imagekit.io/souradeep314/foodview-foodvideos/68fe0360ba4aad59d8fbab3c--d4bb57bd-af0e-4e47-9f79-ee97702f08a4_FeYcD5XXO",
-    "https://ik.imagekit.io/souradeep314/foodview-foodvideos/68fe0360ba4aad59d8fbab3c--a4bd9edb-679d-421c-80ad-254d1266ab48_oDQl4yczN"
+    "https://ik.imagekit.io/souradeep314/foodview-foodvideos/5cd3e9da-da66-43a4-8ec2-7d1e0f2521a0_IA4vi013x4"
   ]);
 
   const handleLogout = async (e) => {
@@ -39,7 +37,7 @@ function PartnerProfile() {
 
   return (
     <div className={styles.container}>
-      {/* <h2 onClick={handleLogout}>Log Out</h2> */}
+      <h2 onClick={handleLogout}>Log Out</h2>
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles.logo}>
