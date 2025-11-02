@@ -9,7 +9,9 @@ app.use(cors({
         "http://localhost:5174",
         "http://localhost:5175",
         "http://localhost:5176",
-        "https://foodview-0s7m.onrender.com"],
+        "https://foodview-0s7m.onrender.com",
+        "https://foodview-admin.onrender.com"
+    ],
     credentials : true
 }))
 app.use(express.json({limit : "30kb"}))
