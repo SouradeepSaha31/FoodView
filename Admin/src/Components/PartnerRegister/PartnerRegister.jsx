@@ -31,7 +31,7 @@ export default function PartnerRegister() {
             return;
         }
         if (!passwordConditaion.minChar || !passwordConditaion.upperCase || !passwordConditaion.lowerCase || !passwordConditaion.specialChar) {
-			alert("Password does not meet all the requirements.");
+			      alert("Password does not meet all the requirements.");
             return;
         }
 		    if (!e.target.address.value) {

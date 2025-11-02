@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.jsx'
-import UserRegister from '../Components/UserRegister/UserRegister.jsx'
-import UserLogin from '../Components/UserLogin/UserLogin.jsx'
-import FoodReels from '../Components/FoodReels/FoodReels.jsx'
+import PartnerRegister from '../Components/PartnerRegister/PartnerRegister.jsx'
+import PartnerLogin from '../Components/PartnerLogin/PartnerLogin.jsx'
+import PartnerProfile from '../Components/PartnerProfile/PartnerProfile.jsx'
 import Home from '../Components/Home/Home.jsx'
 
 
@@ -17,9 +17,9 @@ function AppRouter() {
             <h1>hello</h1>
           </>
         } />
-        <Route path="/user-register" element={<UserRegister/>} />
-        <Route path="/user-login" element={<UserLogin />} />
-        <Route path="/food-reels" element={<ProtectedRoute Component={FoodReels} PageName = "foodreels" />} />
+        <Route path="/partner-register" element={<PartnerRegister />} />
+        <Route path="/partner-login" element={<PartnerLogin />} />
+        <Route path="/partner-profile" element={<ProtectedRoute Component={PartnerProfile} PageName = "partnerprofile" />} />
       </Routes>
     </BrowserRouter>
   )

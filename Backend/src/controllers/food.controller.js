@@ -43,6 +43,14 @@ const addFood = async (req, res) => {
 const getFood = async (req, res) => {
     try {
 
+        if (req.params.partnerid) {
+            const foods = await foodModel.find({foodPartner : req.params.partnerid})
+            return res.status(201).json({
+                message : "Here are the food items for the specific partner",
+                foods
+            })
+        }
+
         const foods = await foodModel.find()
         res.status(201).json({
             message : "Here are the all food items",
@@ -58,18 +66,18 @@ const getFood = async (req, res) => {
     }
 }
 
-const deleteFood = async (req, res) => {
-    try {
+// const deleteFood = async (req, res) => {
+//     try {
 
-        console.log(req.params)
+//         console.log(req.params)
         
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            message : "error in delete food controller", 
-            error
-        })
-    }
-}
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).json({
+//             message : "error in delete food controller", 
+//             error
+//         })
+//     }
+// }
 
-export {addFood, getFood, deleteFood}
+export {addFood, getFood}

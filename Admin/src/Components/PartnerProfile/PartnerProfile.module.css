@@ -134,13 +134,13 @@
     margin: 0 auto;
     padding: 0 2rem;
     padding-bottom: 1rem;
-    background-color: blue;
+    background-color: rgb(255, 255, 255);
 }
 
 .mainContent h2 {
     margin-bottom: 2rem;
     color: #333;
-    background-color: blueviolet;
+    background-color: rgb(255, 255, 255);
 }
 
 .videoGrid {
@@ -154,12 +154,12 @@
 
 .videoCard {
     position: relative;
-    background: black;
+    /* background: black; */
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    /* box-shadow: 0 4px 12px rgba(0,0,0,0.15); */
     transition: transform 0.3s;
-    aspect-ratio: 9/16;
+    /* aspect-ratio: 9/16; */
 }
 
 /* .videoCard:hover {

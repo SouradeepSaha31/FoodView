@@ -13,13 +13,27 @@ protectedRouter.route('/').get(async (req, res) => {
       return res.status(200).json({ message : {
         loggedIn: true, 
         user : true,
-        foodPartner : false
+        foodPartner : false,
+        detailes : {
+          _id : user._id,
+          fullname : user.fullname, 
+          email : user.email
+        }
       } });
     } else {
+        const foodPartner = await foodPartnerModel.findById(decoded._id);
         return res.status(200).json({ message : {
         loggedIn: true, 
         user : false,
-        foodPartner : true
+        foodPartner : true,
+        detailes : {
+          _id : foodPartner._id, 
+          businessname : foodPartner.businessname, 
+          contactname : foodPartner.contactname,
+          phoneno : foodPartner.phoneno, 
+          email : foodPartner.email,
+          address : foodPartner.address
+        }
       } });
     }
   } else {

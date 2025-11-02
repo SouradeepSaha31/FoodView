@@ -1,15 +1,14 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../../BaseUrl/BaseUrl.js";
 import styles from "./PartnerProfile.module.css";
 
-function PartnerProfile() {
+function PartnerProfile({detailes}) {
+  console.log(detailes)
   const navigate = useNavigate();
   let [playvideo, setPlayvideo] = useState();
 
-  let [foods, setFoods] = useState([
-    "https://ik.imagekit.io/souradeep314/foodview-foodvideos/11cc8917-977c-438e-9f3a-7bfbb9d3f7f4_ZZUdjFwol"
-  ]);
+  let [foods, setFoods] = useState([]);
 
   const handleLogout = async (e) => {
     try {
@@ -21,19 +20,20 @@ function PartnerProfile() {
     }
   };
 
-  // useEffect(() => {
-  //       const fetchfoods = async () => {
-  //           try {
-  //               const response = await baseUrl.get("/api/food/getfood");
-  //               setFoods(response.data.foods);
-  //           } catch (error) {
-  //               console.log(error.response.data.message);
-  //               console.log(error);
-  //               alert(error.response.data.message);
-  //           }
-  //       };
-  //       fetchfoods();
-  //   }, []);
+  useEffect(() => {
+        const fetchfoods = async () => {
+            try {
+                const response = await baseUrl.get(`/api/food/getfood/${detailes._id}`,{withCredentials : true} );
+                setFoods(response.data.foods);
+                console.log(response.data.foods)
+            } catch (error) {
+                console.log(error.response.data.message);
+                console.log(error);
+                alert(error.response.data.message);
+            }
+        };
+        fetchfoods();
+    }, []);
 
   return (
     <div className={styles.container}>
@@ -67,8 +67,8 @@ function PartnerProfile() {
             <img src="https://placehold.co/150x150" alt="Profile" />
           </div>
           <div className={styles.businessInfo}>
-            <h1>BUSINESS NAME: "THE ROASTED BEA"</h1>
-            <p>CONTACT PERSON: CHEF ANNA RAI</p>
+            <h1>BUSINESS NAME: {detailes.businessname}</h1>
+            <p>CONTACT PERSON: {detailes.contactname}</p>
             <p>LISTED FOODS: 27</p>
             <button className={styles.editButton}>EDIT PROFILE</button>
           </div>
@@ -83,10 +83,8 @@ function PartnerProfile() {
         <div className={styles.videoGrid}>
           {foods.map((food, index) => (
               <div key={index} className={styles.videoCard} onMouseEnter = {() => (setPlayvideo(true), console.log("first"))} onMouseLeave={() => setPlayvideo(false)}>
-                {/* <div className={styles.thumbnail}> */}
                   <video
-                    src = {food}
-                    // poster={`https://placehold.co/360x640`}
+                    src = {food.video}
                     loop
                     autoPlay = {playvideo}
                     muted
@@ -95,9 +93,7 @@ function PartnerProfile() {
                   />
                   <div className={styles.videoInfo}>
                     <p className={styles.duration}>01:30</p>
-                    {/* <p className={styles.views}>2.5K views</p> */}
                   </div>
-                {/* </div> */}
               </div>
             ))}
         </div>
