@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import baseUrl from "../../BaseUrl/BaseUrl.js"
 import styles from "./UserLogin.module.css"
+// import { ToastContainer, toast } from 'react-toastify';
 
 export default function UserLogin(){
+    // const notify = () => toast('Wow so easy !');
 
     const navigate = useNavigate();
 
@@ -26,7 +28,7 @@ export default function UserLogin(){
         try {
             const response = await baseUrl.post('/api/user/login', data, {withCredentials: true});
             console.log(response.data.user)
-            navigate("/food-reels");
+            navigate("/dashboard");
         } catch (error) {
             console.log("error in handle submit in user login")
             alert(error.response.data.message)
@@ -35,9 +37,14 @@ export default function UserLogin(){
 
 	return (
         <div className={styles.wraper}>
+             {/* <ToastContainer 
+                position="top-center"
+                autoClose={1000}
+             /> */}
             <div className={styles.card}>
 
                 <h2 className={styles.text}>Login as a User</h2>
+                {/* <button onClick={notify}>Notify !</button>/ */}
 
                 <form action="" method="post" onSubmit={handleSubmit}>
 

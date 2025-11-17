@@ -13,7 +13,7 @@ const fileUpload = async (file, filename) => {
     const response = await client.files.upload({
       file: file.buffer.toString('base64'),
       fileName: filename,
-      folder : "/foodview-foodvideos"
+      folder : "/Foodview"
     });
 
     return response;

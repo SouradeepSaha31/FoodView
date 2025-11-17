@@ -34,7 +34,7 @@ export default function UserRegister() {
         try {
             const response = await baseUrl.post('/api/user/register', data, {withCredentials: true});
             console.log(response.data)
-            navigate("/food-reels");
+            navigate("/dashboard");
         } catch (error) {
             console.log("error in handle submit in user register")
             alert(error.response.data.message)

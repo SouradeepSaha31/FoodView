@@ -19,13 +19,13 @@ function ProtectedRoute({Component, PageName}) {
         verifyUser();
     }, [])
 
-    if (message.loggedIn && message.user && PageName == "foodreels") {
-        return <Component detailes = {message.detailes}/>
-    } else {
-        return <ErrorPage message = "Access denied"/>
-    }
+    // if (message.loggedIn && message.user && PageName == "dashboard") {
+    //     return <Component detailes = {message.detailes}/>
+    // } else {
+    //     return <ErrorPage message = "Access denied"/>
+    // }
 
-    // return <Component/>
+    return <Component/>
 
 }
 
