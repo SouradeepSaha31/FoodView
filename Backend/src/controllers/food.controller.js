@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 const addFood = async (req, res) => {
     try {
-        const {title, description} = req.body
+        const {title, description, price} = req.body
         const file = req.file
         const id = req.foodPartner._id
 
@@ -14,6 +14,7 @@ const addFood = async (req, res) => {
 
         if (!title) return res.status(400).json({message : "video title is required"})
         if (!description) return res.status(400).json({message : "video description is required"})
+        if (!price) return res.status(400).json({message : "price is required"})
         if (!file) return res.status(400).json({message : "video not found"})
 
         const response = await fileUpload(file, uuid())
@@ -21,13 +22,15 @@ const addFood = async (req, res) => {
         const food = await foodModel.create({
             title,
             description,
-            video : response.url,
-            videoId : response.fileId,
+            price,
+            image : response.url,
+            imageId : response.fileId,
             foodPartner : id
         })
 
         res.status(201).json({
             message : "food created successfully",
+            response,
             food
         })
 

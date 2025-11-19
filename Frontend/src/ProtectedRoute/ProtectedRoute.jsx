@@ -16,7 +16,7 @@ function ProtectedRoute({Component, PageName}) {
                 alert("problem in protected route");
             }
         }
-        verifyUser();
+        // verifyUser();
     }, [])
 
     // if (message.loggedIn && message.user && PageName == "dashboard") {

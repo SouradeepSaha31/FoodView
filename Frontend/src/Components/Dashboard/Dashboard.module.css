@@ -4,74 +4,187 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-.reelsWrapper {
-    /* This wrapper allows you to resize the container */
-    width: 80%;  /* Default width - can be changed */
-    height: 100%; /* Default height - can be changed */
-    /* margin: 20px;  Add some space around the container */
-    /* resize: both;  Allow both horizontal and vertical resizing */
-    overflow: hidden;
-    border: 2px solid #ccc;
-    position: relative;
+.dashboard{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(180deg,#fbfdff 0%, #f6fbf8 100%);
+    padding-top: calc(10px + 1vw);
+    padding-bottom: calc(50px + 3vw);
+    padding-left: calc(20px + 5vw);
+    padding-right: calc(20px + 5vw);
+    /* background-color: #3d0606; */
 }
 
-.reelsContainer {
+.container{
     width: 100%;
-    height: 100%;
-    position: relative;
-    background-color: rgb(0, 0, 0);
-    overflow: hidden;
-}
-
-.videoContainer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s ease;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* max-width: 1200px; */
+    /* margin: 0 auto; */
+    /* padding: 0.5rem; */
+    /* background-color: rgb(4, 78, 71); */
 }
 
-.reelVideo {
+.food_card{
+    background: linear-gradient(180deg, #ffffff, #fcfcff);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 28px rgba(12,20,40,0.08);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    height: 270px;
+    width: 32%;
+    cursor: pointer;
+}
+
+.food_card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 18px 50px rgba(12,20,40,0.12);
+}
+
+.imageDiv{
+    width: 100%;
+    /* aspect-ratio: 4 / 3; */
+    height: 75%;
+    background-color: #f3f4f6;
+    background-position: center;
+    background-size: cover;
+    display: block;
+}
+
+.imageDiv img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    background-color: rgb(0, 0, 0);
+    object-fit: cover;
+    display: block;
 }
 
-.active {
-    z-index: 1;
-}
-
-.main {
+.infoDiv{
     width: 100%;
-    height: 100vh;
+    height: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* gap: 8px; */
+    /* background-color: aquamarine; */
+}
+
+.infoleft{
+    width: 50%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
+    /* align-items: center; */
+    padding-left: 12px;
+    /* gap: 4px; */
+    /* background-color: rgb(77, 57, 76); */
 }
-.top {
-    width: 100%;
-    height: 10%;
-    background-color: #ff6347;
+
+
+.name{
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0f172a;
 }
-.bottom {
-    width: 100%;
-    height: 90%;
-    background-color: #4682b4;
+
+.price{
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ff6b6b;
+    /* background: rgba(255,107,107,0.08); */
+    /* padding: 6px 10px; */
+    /* border-radius: 999px; */
+}
+
+.inforight{
+    width: 50%;
+    height: 100%;
+    /* background-color: rgb(252, 248, 0); */
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 12px;
 }
-.left {
-    width: 20%;
-    height: 100%;
-    background-color: #32cd32;
+.cartbox{
+    /* width: 72px;
+    height: 32px; */
+    background-color: #e2e1e1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    gap: 5px;
+    padding: 3px;
 }
-.right {
-    width: 80%;
-    height: 100%;
-    background-color: #ffa500;
+.minus{
+    height: 22px;
+    width: 22px;
+    border-radius: 50px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
 }
+.count{
+    height: 20px;
+    width: 20px;
+    border-radius: 50px;
+    /* background-color: #ffffff; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+.plus{
+    height: 22px;
+    width: 22px;
+    border-radius: 50px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+
+@media (max-width: 982px){
+    .food_card{ 
+        width: 48%; 
+    }
+}
+@media (max-width: 599px){
+    .food_card{ 
+        width: 100%; 
+    }
+    .food_card:hover{
+        transform: translateY(0px);
+    }
+}
+
+
+/* Small screens: larger cards in single column */
+
+/* @media (max-width: 720px){
+    .container{ justify-content: center; }
+    .food_card{ width: 100%; max-width: 420px; min-height: 220px; flex: 0 1 100%; }
+    .name{ font-size: 1rem; }
+}
+
+@media (min-width: 721px) and (max-width: 1024px){
+    .food_card{ flex: 0 1 46%; width: 46%; }
+} */
+
+/* Utility for injecting an image via inline style on .imageDiv */
+/* .imageDiv.empty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-weight: 600;
+} */

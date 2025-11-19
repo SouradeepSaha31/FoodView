@@ -10,7 +10,7 @@ const upload = multer({
     storage : multer.memoryStorage()
 })
 
-foodRouter.route("/").post(isLoggedIn, isFoodPartner, upload.single("video"), addFood)
+foodRouter.route("/").post(isLoggedIn, isFoodPartner, upload.single("image"), addFood)
 foodRouter.route("/getfood").get(isLoggedIn, isUser, getFood)
 // get food for specific profile of food partner
 foodRouter.route("/getfood/:partnerid").get(isLoggedIn, getFood)

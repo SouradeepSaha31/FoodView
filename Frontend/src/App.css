@@ -1,0 +1,22 @@
+/* Global page offsets so fixed header/footer don't overlap content */
+:root{
+	--site-header-height: 72px;
+	--site-footer-height: 72px;
+}
+
+body{
+	padding-top: var(--site-header-height);
+	padding-bottom: var(--site-footer-height);
+	background: #fbfdff;
+	min-height: 100vh;
+}
+
+/* If footer is hidden on small screens, remove bottom padding */
+@media (max-width: 550px){
+	body{ padding-bottom: 0; }
+}
+
+/* Ensure the routed outlet content can scroll independently */
+main, .content, #root{
+	min-height: calc(100vh - var(--site-header-height) - var(--site-footer-height));
+}
