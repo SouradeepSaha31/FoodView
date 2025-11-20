@@ -1,370 +1,342 @@
-/* Container */
-.container {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 0;
-    background-color: #f5f5f5;
-}
-
-/* Header & Navigation */
-.header {
-    background-color: white;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.logo img {
-    height: 40px;
-}
-
-.navLinks {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-.navLinks a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.navLinks a:hover,
-.navLinks a.active {
-    color: #4CAF50;
-}
-
-.menuIcon {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    cursor: pointer;
-}
-
-.menuIcon span {
-    width: 25px;
-    height: 2px;
-    background-color: #333;
-    transition: 0.3s;
-}
-
-/* Hero Section */
-.heroSection {
-    background-color: white;
-    margin-bottom: 2rem;
-}
-
-.banner {
+.profile{
     width: 100%;
-    height: 300px;
-    overflow: hidden;
-    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(180deg,#fbfdff 0%, #f6fbf8 100%);
+    padding-top: calc(10px + 1vw);
+    padding-bottom: calc(50px + 3vw);
+    padding-left: calc(20px + 5vw);
+    padding-right: calc(20px + 5vw);
+    /* background-color: #3d0606; */
 }
 
-.banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.profileInfo {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.profileImage {
-    position: relative;
-}
-
-.profileImage img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 4px solid white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.businessInfo h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    color: #333;
-}
-
-.businessInfo p {
-    color: #666;
-    margin: 0.5rem 0;
-}
-
-.editButton {
-    margin-top: 1rem;
-    padding: 0.5rem 1.5rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.editButton:hover {
-    background-color: #45a049;
-}
-
-/* Main Content */
-.mainContent {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    padding-bottom: 1rem;
-    background-color: rgb(255, 255, 255);
-}
-
-.mainContent h2 {
-    margin-bottom: 2rem;
-    color: #333;
-    background-color: rgb(255, 255, 255);
-}
-
-.videoGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.videoCard {
-    position: relative;
-    /* background: black; */
-    border-radius: 12px;
-    overflow: hidden;
-    /* box-shadow: 0 4px 12px rgba(0,0,0,0.15); */
-    transition: transform 0.3s;
-    /* aspect-ratio: 9/16; */
-}
-
-/* .videoCard:hover {
-    transform: translateY(-5px);
-} */
-
-/* .thumbnail {
-    position: relative;
-    width: 100%;
-    height: 100%;
-} */
-
-/* .thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-} */
-
-.reelVideo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-  background: black;
-  display: block;
-}
-
-/* .playButton {
-    position: absolute;
+.popup{
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255,255,255,0.9);
-    border-radius: 50%;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-} */
+    width: 100%;
+    height: 100%;
+    background: rgba(117, 117, 117, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 2000;
+    padding: 1rem 2rem;
+}
 
-/* .videoCard:hover .playButton {
-    opacity: 1;
-} */
-
-/* .playButton::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-    border-left: 15px solid #4CAF50;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-} */
-
-.videoInfo {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 15px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    color: white;
+.popupContainer{
+    width : 100%;
+    max-width: 600px;
+    height : 580px;
+    background : white;
+    border-radius : 12px;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.12);
+    position : relative;
+    top : 50%;
+    left : 50%;
+    transform : translate(-50%, -50%);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction : column;
+    justify-content : flex-start;
+    align-items : center;
+    gap : 1rem;
+    padding: 1rem;
 }
 
-.duration, .views {
-    background-color: rgba(0,0,0,0.5);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
+.popupContainer .labelAndImage{
+    width : 100%;
+    height: 400px;
+    position: relative;
 }
 
-/* .videoOverlay {
+.popupContainer .labelAndImage .imgDiv{
+    width : 100%;
+    height: 100%;
+    /* background-color: #ff6b6b; */
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(transparent 60%, rgba(0,0,0,0.8));
-    padding: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+    /* display: block; */
+    padding: 0;
+}
+
+.popupContainer .labelAndImage .imgDiv img{
+    width: 103%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popupContainer .labelAndImage label{
+    width : 100%;
+    height: 100%;
+    background-color: rgba(255, 112, 112, 0.137);
+    padding : 10px;
+    /* border : 1px solid #ccc; */
+    border-radius : 8px;
+    font-size : 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.popupContainer label .addFileIcon{
+    color: #fff;
+    font-size: 10rem;
+}
+
+.popupContainer .titleAndPrice{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    /* background-color: #ff6b6b; */
+}
+.popupContainer .titleAndPrice input[type = "text"]{
+    width: 50%;
+    height: 30px;
+    padding: 1rem 1rem;
+    font-size: 16px;
+    font-family: sans-serif;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.popupContainer .description {
+  width: 100%;
+  /* max-width: 500px;   optional */
+  height: 100px;      /* fixed height */
+  padding: 1rem 1rem;
+  font-size: 16px;
+  font-family: sans-serif;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.popupContainer .buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #646363; */
+}
+.popupContainer .buttons .add{
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #22c55e;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.popupContainer .buttons .close{
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ef4444;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Partner profile sub-styles (do not change .profile above) */
+.pp_container{
+    width: 100%;
+    /* height: 100vh; */
+    /* margin: 0 auto; */
+    /* background-color: #646363; */
+}
+
+.pp_header{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    background: rgba(41, 39, 39, 0.03);
+    border-radius: 12px;
+}
+
+.pp_avatar{
+    width: 100px;
+    height: 90px;
+    /* border: 1px solid black; */
+    border-radius: 12px;
+    background-color: #eee;
+    background-position: center;
+    background-size: cover;
+    /* flex: 0 0 110px; */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+
+.pp_avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pp_shopInfo{
+    width: 100%;
+    /* background-color: aqua; */
+}
+
+.pp_shopName{
+    color: #000000;
+    font-size: 1.35rem;
+    margin-bottom: 4px;
+}
+
+.pp_shopMeta{
+    color: #7c7373;
+    font-size: 0.95rem;
+}
+
+.pp_count{
+    color: #646363;
+    margin: 14px 0;
+    padding-left: 6px;
+    font-weight: 700;
+    /* background-color: #ff6b6b; */
+}
+
+.pp_items{
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    opacity: 0;
-    transition: opacity 0.3s;
-} */
-
-/* .videoCard:hover .videoOverlay {
-    opacity: 1;
-} */
-
-/* .videoOverlay h3 {
-    color: white;
-    margin-bottom: 8px;
-    font-size: 1rem;
-} */
-
-/* .videoOverlay p {
-    color: rgba(255,255,255,0.8);
-    font-size: 0.9rem;
-} */
-
-/* Responsive adjustments for video grid */
-@media (max-width: 1024px) {
-    .videoGrid {
-        padding: 0 1rem;
-        padding-bottom: 1rem;
-        gap: 1rem;
-    }
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* overflow-x: auto; */
+    width: 100%;
+    /* padding: 1rem; */
+    /* background-color: #ff6b6b; */
 }
 
-@media (max-width: 768px) {
-    .videoGrid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .videoGrid {
-        grid-template-columns: repeat(1, 1fr);
-        max-width: 350px;
-    }
-    
-    .videoCard {
-        max-width: 100%;
-    }
-}
-
-.loadMore {
-    display: block;
-    margin: 2rem auto;
-    padding: 0.8rem 2rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
+.addButton{
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    background: rgba(255, 107, 107, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: #ff6b6b;
     cursor: pointer;
-    transition: background-color 0.3s;
+    /* transition: background-color 150ms ease, color 150ms ease; */
 }
 
-.loadMore:hover {
-    background-color: #45a049;
+.food_card{
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.12);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    /* flex-direction: column; */
+    padding: 1rem;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .profileInfo {
-        padding: 1.5rem;
-    }
-    
-    .videoGrid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-    .mainContent {
-        padding-bottom: 0;
-    }
+.food_img{
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
 }
 
-@media (max-width: 768px) {
-    .navLinks {
-        display: none;
-    }
-    
-    .menuIcon {
-        display: flex;
-    }
-    
-    .profileInfo {
+.food_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.food_body{
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* background-color: aqua; */
+}
+
+.food_top{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.food_title{
+    font-size: 1.3rem;
+    color: #0f172a;
+}
+
+.food_price{
+    font-size: 1.2rem;
+    color: #ff6b6b;
+    font-weight: 800;
+}
+
+.food_desc{
+    color: #334155;
+    font-size: 1rem;
+}
+
+/* Responsive: on small screens stack items vertically instead of horizontal scroll */
+@media (max-width: 570px){
+    .food_card{
         flex-direction: column;
-        text-align: center;
+        padding: 0;
+        gap: 0;
     }
-    
-    .businessInfo h1 {
-        font-size: 1.5rem;
+    .food_img{
+        width: 100%;
+        height: 140px;
+        border-radius: 0;
     }
-    
-    .mainContent {
-        padding: 0 1rem;
+    .food_body{
+        width: 100%;
     }
-    
-    .videoGrid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 1rem;
+    .food_title{
+        font-size: 1.05rem;
+    }
+    .food_price{
+        color: #ff6b6b;
+        font-weight: 800;
+    }
+    .food_desc{
+        color: #334155;
+        font-size: 0.95rem;
     }
 }
 
-@media (max-width: 480px) {
-    .header {
-        padding: 1rem;
+@media (max-width: 420px){
+    .pp_shopName{ 
+        font-size: 1rem; 
     }
-    
-    .profileImage img {
-        width: 120px;
-        height: 120px;
+    .pp_shopMeta{ 
+        font-size: 0.8rem; 
     }
-    
-    .businessInfo h1 {
-        font-size: 1.2rem;
-    }
-    
-    .videoGrid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    .pp_avatar{
+        width: 130px;
+        height: 80px;
     }
 }

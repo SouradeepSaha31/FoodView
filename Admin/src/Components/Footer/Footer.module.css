@@ -1,0 +1,77 @@
+/* @import "tailwindcss"; */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+.main{
+    /* height: 100vh;
+    width: 100%; */
+    position: relative;
+}
+
+.footer {
+    width: 100%;
+    height: 50px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 -6px 18px rgba(2,6,23,0.06);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1100;
+    /* gap: 0.5vw; */
+}
+
+.footer .links{
+    text-decoration: none;
+    color: #0f172a;
+    padding: 8px 12px;
+    border-radius: 8px;
+    /* font-weight: 500; */
+    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+.text{
+    font-size: 1rem;
+}
+
+.footer .links:hover{
+    background: rgba(78, 18, 18, 0.04);
+    transform: translateY(-2px);
+}
+.active{
+    background: rgba(78, 18, 18, 0.04);
+}
+.icon{
+    display: none;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+
+@media (max-width: 550px){
+    .footer {
+        display: flex;
+    }
+}
+@media (max-width: 420px){
+    .icon{
+        display: block;
+    }
+    .text{
+        display: none;
+    }
+}

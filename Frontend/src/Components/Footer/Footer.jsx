@@ -10,7 +10,6 @@ import { MdOutlineBorderColor } from "react-icons/md";
 function Footer() {
   return (
     <>
-        {/* <main className={styles.main}> */}
           <nav className={styles.footer}>    
               <NavLink to="/dashboard" className={({isActive}) => `${styles.links} ${isActive ? styles.active : ""}`}>
                 <h5 className={styles.text}>Dashboard</h5> 
@@ -25,7 +24,6 @@ function Footer() {
                 <MdOutlineBorderColor className={styles.icon}/>
               </NavLink>
           </nav>
-        {/* </main> */}
     </>
   )
 }
