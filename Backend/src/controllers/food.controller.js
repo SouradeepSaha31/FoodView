@@ -1,23 +1,24 @@
 import isLoggedIn from "../middlewares/isLoggedIn.middleware.js";
 import foodModel from "../models/food.model.js"
 import foodPartnerModel from "../models/foodPartner.model.js"
-import { fileUpload } from "../services/storage.service.js"
+import { foodItemImageUpload } from "../services/storage.service.js"
 import { v4 as uuid } from 'uuid';
 
 const addFood = async (req, res) => {
     try {
         const {title, description, price} = req.body
-        const file = req.file
+        const image = req.file
         const id = req.foodPartner._id
 
-        console.log(file)
+        console.log(req.body,image)
+        // return
 
-        if (!title) return res.status(400).json({message : "video title is required"})
-        if (!description) return res.status(400).json({message : "video description is required"})
+        if (!title) return res.status(400).json({message : "title is required"})
+        if (!description) return res.status(400).json({message : "description is required"})
         if (!price) return res.status(400).json({message : "price is required"})
-        if (!file) return res.status(400).json({message : "video not found"})
+        if (!image) return res.status(400).json({message : "image not found"})
 
-        const response = await fileUpload(file, uuid())
+        const response = await foodItemImageUpload(image, uuid())
 
         const food = await foodModel.create({
             title,
@@ -30,7 +31,6 @@ const addFood = async (req, res) => {
 
         res.status(201).json({
             message : "food created successfully",
-            response,
             food
         })
 
@@ -43,18 +43,28 @@ const addFood = async (req, res) => {
     }
 }
 
+const getFoodForPartner = async (req, res) => {
+    try {
+
+        const id = req.foodPartner._id
+        const foods = await foodModel.find({foodPartner : id})
+        res.status(201).json({
+            message : "Here are the all food items",
+            foods
+        })
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message : "error in get food controller", 
+            error
+        })
+    }
+}
 const getFood = async (req, res) => {
     try {
 
-        if (req.params.partnerid) {
-            const foods = await foodModel.find({foodPartner : req.params.partnerid})
-            return res.status(201).json({
-                message : "Here are the food items for the specific partner",
-                foods
-            })
-        }
-
-        const foods = await foodModel.find()
+        
         res.status(201).json({
             message : "Here are the all food items",
             foods
@@ -69,18 +79,4 @@ const getFood = async (req, res) => {
     }
 }
 
-// const deleteFood = async (req, res) => {
-//     try {
-
-//         console.log(req.params)
-        
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500).json({
-//             message : "error in delete food controller", 
-//             error
-//         })
-//     }
-// }
-
-export {addFood, getFood}
+export {addFood, getFood, getFoodForPartner}

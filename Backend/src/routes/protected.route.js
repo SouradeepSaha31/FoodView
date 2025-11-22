@@ -31,8 +31,8 @@ protectedRouter.route('/').get(async (req, res) => {
           businessname : foodPartner.businessname, 
           contactname : foodPartner.contactname,
           phoneno : foodPartner.phoneno, 
-          email : foodPartner.email,
-          address : foodPartner.address
+          address : foodPartner.address,
+          image : foodPartner.avatar
         }
       } });
     }

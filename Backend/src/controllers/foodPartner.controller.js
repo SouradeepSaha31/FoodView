@@ -1,6 +1,9 @@
 import foodPartnerModel from "../models/foodPartner.model.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { partnerProfileImageUpload } from "../services/storage.service.js"
+import { v4 as uuid } from 'uuid';
+
 
 const register = async (req, res) => {
     try {
@@ -151,4 +154,31 @@ const logout = async (req, res) => {
     }
 }
 
-export {register, login, logout}
+const addProfilePic = async (req, res) => {
+    try {
+
+        let id = req.foodPartner._id
+        let file = req.file
+        // return
+        if(!file) return res.status(400).json({message : "image is required"})
+
+        let foodpartner = await foodPartnerModel.findById(id)
+
+        const response = await partnerProfileImageUpload(file, String(id), foodpartner.avatarId)
+
+        foodpartner.avatar = response.url
+        foodpartner.avatarId = response.fileId
+        foodpartner.save()
+        res.status(201).json({message : "picture upload successfully"})
+
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message : "error in user addProfilePic controller",
+            error
+        })
+    }
+}
+
+export {register, login, logout, addProfilePic}

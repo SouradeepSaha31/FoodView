@@ -30,10 +30,10 @@ export default function PartnerRegister() {
             alert("Email is required.");
             return;
         }
-        if (!passwordConditaion.minChar || !passwordConditaion.upperCase || !passwordConditaion.lowerCase || !passwordConditaion.specialChar) {
-			      alert("Password does not meet all the requirements.");
-            return;
-        }
+        // if (!passwordConditaion.minChar || !passwordConditaion.upperCase || !passwordConditaion.lowerCase || !passwordConditaion.specialChar) {
+			  //     alert("Password does not meet all the requirements.");
+        //     return;
+        // }
 		    if (!e.target.address.value) {
 		    	alert("Address is required.");
 		    	return;

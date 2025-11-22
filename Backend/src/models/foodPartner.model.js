@@ -27,6 +27,14 @@ const foodPartnerSchema = new mongoose.Schema({
     address : {
         type : String,
         required : true,
+    },
+    avatar : {
+        type : String,
+        default : "default_partner_profile_image.jpg"
+    },
+    avatarId : {
+        type : String,
+        default : null
     }
 },{
     timestamps : true
