@@ -6,36 +6,60 @@ import { FaPlus, FaMinus } from "react-icons/fa6";
 
 
 
-function Dashboard() {
-    const navigate = useNavigate();
+function Dashboard({detailes}) {
+    // console.log(detailes)
+    // console.log(detailes.cart.foodItems)
+    // const navigate = useNavigate();
     let [foods, setFoods] = useState([]);
+    let [cart, setCart] = useState([]);
+    let [stopClickingOnAddLessButtons, setStopClickingOnAddLessButtons] = useState(false);
 
-    // useEffect(() => {
-    //     const fetchfoods = async () => {
-    //         try {
-    //             const response = await baseUrl.get("/api/food/getfood", {withCredentials: true});
-    //             setFoods(response.data.foods);
-    //             console.log(foods)
-    //         } catch (error) {
-    //             console.log(error.response.data.message);
-    //             console.log(error);
-    //             alert(error.response.data.message);
-    //         }
-    //     };
-    //     fetchfoods();
-    // }, []);
+    useEffect(() => {
+        const fetchfoods = async () => {
+            try {
+                const response = await baseUrl.get("/api/food/getfood", {withCredentials: true});
+                setFoods(response.data.allFoods);
+                setCart(response.data.cart)
+                console.log(response.data)
+            } catch (error) {
+                console.log(error.response.data.message);
+                console.log(error);
+                alert(error.response.data.message);
+            }
+        };
+        fetchfoods();
+    }, []);
 
-
-    // const handleLogout = async (e) => {
-    //     try {
-    //         const response = await baseUrl.get("/api/user/logout", { withCredentials: true });
-    //         alert(response.data.message);
-    //         navigate("/user-login");
-    //     } catch (error) {
-    //         console.log(error);
-    //         alert("Error logging out");
-    //     }
-    // }
+    const addTocart = async (foodid) => {
+        try {
+            setStopClickingOnAddLessButtons(true)
+            console.log("call", foodid)
+            const response = await baseUrl.post(`/api/food/addtocart/${foodid}`)
+            console.log(response.data.message)
+            console.log(response.data.cartItems)
+            setCart(response.data.cartItems)
+            setStopClickingOnAddLessButtons(false)
+        } catch (error) {
+            console.log(error)
+            alert(error.response.data.message)
+            setStopClickingOnAddLessButtons(false)
+        }
+    }
+    const lessTocart = async (foodid) => {
+        try {
+            setStopClickingOnAddLessButtons(true)
+            console.log("call", foodid)
+            const response = await baseUrl.post(`/api/food/lesstocart/${foodid}`)
+            console.log(response.data.message)
+            console.log(response.data.cartItems)
+            setCart(response.data.cartItems)
+            setStopClickingOnAddLessButtons(false)
+        } catch (error) {
+            console.log(error)
+            alert(error.response.data.message)
+            setStopClickingOnAddLessButtons(false)
+        }
+    }
 
 
     const items = Array.from("11111222222111");
@@ -45,21 +69,23 @@ function Dashboard() {
             <>
                 <div className={styles.dashboard}>
                     <div className={styles.container}>
-                        {items.map((food, index) => (
+                        {foods.map((food, index) => (
                             <div key={index} className={styles.food_card}>
                                 <div className={styles.imageDiv}>
-                                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D" alt="" />
+                                    <img src={`${food.image}`} alt="" />
                                 </div>
                                 <div className={styles.infoDiv}>
                                     <div className={styles.infoleft}>
-                                        <h3 className={styles.name}>Biriyani</h3>
-                                        <h3 className={styles.price}>300</h3>
+                                        <h3 className={styles.name}>{food.title}</h3>
+                                        <h3 className={styles.price}>{food.price}</h3>
                                     </div>
                                     <div className={styles.inforight}>
                                         <div className={styles.cartbox}>
-                                            <div className={styles.minus} onClick={() => setCount((prev) => (prev == 0 ? 0 : prev-1))}><FaMinus /></div>
-                                            <div className={styles.count}>{count}</div>
-                                            <div className={styles.plus} onClick={() => setCount((prev) => prev+1)}><FaPlus /></div>
+                                            <div className={styles.minus} onClick={() => stopClickingOnAddLessButtons ? "" : lessTocart(food._id)}><FaMinus /></div>
+                                            <div className={styles.count}>
+                                                {cart.find((f) => f.id === food._id)?.quantity || 0}
+                                            </div>
+                                            <div className={styles.plus} onClick={() => stopClickingOnAddLessButtons ? "" : addTocart(food._id)}><FaPlus /></div>
                                         </div>
                                     </div>
                                 </div>

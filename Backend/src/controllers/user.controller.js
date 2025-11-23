@@ -1,4 +1,5 @@
 import userModel from "../models/user.model.js"
+import cartModel from "../models/cart.model.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
@@ -23,20 +24,7 @@ const register = async (req, res) => {
 
         // password validation
 
-        const validatePassword = (password) => {
-            const minChar = password.length >= 8;
-             const upperCase = /[A-Z]/.test(password);
-             const lowerCase = /[a-z]/.test(password);
-             const specialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-             return minChar && upperCase && lowerCase && specialChar;
-        };
-
-        // if (!validatePassword(password)) {
-        //     return res.status(400).json({
-        //     message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one special character.",
-        //     });
-        // }
+        if (password.length < 4) return res.status(400).json({message : "password have minimum 4 charecters"})
 
         // hash password
 
@@ -50,6 +38,16 @@ const register = async (req, res) => {
             email,
             password : hashPass
         })
+
+        // cart create
+        
+        const cart = await cartModel.create({
+            userId : user._id
+        })
+
+        user.cartId = cart._id
+        user.save()
+
 
         // generate token
 
@@ -67,6 +65,7 @@ const register = async (req, res) => {
         })
         
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             message : "error in user register controller", 
             error

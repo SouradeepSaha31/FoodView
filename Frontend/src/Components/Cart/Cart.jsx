@@ -1,9 +1,66 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styles from "./Cart.module.css"
+import baseUrl from "../../BaseUrl/BaseUrl.js"
 import { FaPlus, FaMinus } from "react-icons/fa6";
 
 
 function Cart() {
+  let [cartItems, setCartItems] = useState([])
+  let [stopClickingOnAddLessButtons, setStopClickingOnAddLessButtons] = useState(false);
+
+  
+  const fetchCartItems = async () => {
+          try {
+            console.log("hi")
+              const response = await baseUrl.get("/api/food/getcartitems", {withCredentials: true});
+              console.log("hello")
+              console.log(response.data);
+              setCartItems(response.data.cartItems);
+          } catch (error) {
+              console.log(error.response.data.message);
+              console.log(error);
+              alert(error.response.data.message);
+          }
+      };
+
+  useEffect(() => {
+      fetchCartItems();
+  }, []);
+
+  
+  const addTocart = async (foodid) => {
+    try {
+      setStopClickingOnAddLessButtons(true)
+      console.log("call", foodid)
+      const response = await baseUrl.post(`/api/food/addtocart/${foodid}`)
+      console.log(response.data.message)
+      console.log(response.data.cartItems)
+      fetchCartItems();
+      setStopClickingOnAddLessButtons(false)
+    } catch (error) {
+      console.log(error)
+      alert(error.response.data.message)
+      setStopClickingOnAddLessButtons(false)
+    }
+  }
+  const lessTocart = async (foodid) => {
+    try {
+      setStopClickingOnAddLessButtons(true)
+      console.log("call", foodid)
+      const response = await baseUrl.post(`/api/food/lesstocart/${foodid}`)
+      console.log(response.data.message)
+      console.log(response.data.cartItems)
+      fetchCartItems();
+      setStopClickingOnAddLessButtons(false)
+    } catch (error) {
+            console.log(error)
+            alert(error.response.data.message)
+            setStopClickingOnAddLessButtons(false)
+      }
+    }
+
+
+
   const items = [
     { id: 1, title: 'Chicken Biriyani', price: 300, img: 'https://placehold.co/300x300?text=Biriyani' },
     { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
@@ -16,13 +73,13 @@ function Cart() {
       const [count, setCount] = useState(0)
   
 
-  const subtotal = items.reduce((s, it) => s + it.price, 0)
+  const subtotal = cartItems.reduce((acc, curr) => acc + (curr.id.price * curr.quantity), 0)
 
   return (
     <div className={styles.cart}>
       <div className={styles.cart__inner}>
         {
-        items.length === 0 ? (
+        cartItems.length === 0 ? (
           <div className={styles.emptyCart} role="alert">
             Your cart is empty.
           </div>
@@ -30,20 +87,20 @@ function Cart() {
           <>
 
         <section className={styles.cart_left} aria-label="Cart items">
-          {items.map(item => (
-            <article key={item.id} className={styles.cartItem}>
+          {cartItems.map((item, index) => (
+            <article key={index} className={styles.cartItem}>
               <div className={styles.cartItem__img}>
-                <img src={item.img} alt="" />
+                <img src={item.id.image} alt="" />
               </div>
               <div className={styles.cartItem__meta}>
                 <div>
-                  <div className={styles.cartItem__title}>{item.title}</div>
-                  <div className={styles.cartItem__price}>₹ {item.price}</div>
+                  <div className={styles.cartItem__title}>{item.id.title}</div>
+                  <div className={styles.cartItem__price}>₹ {item.id.price}</div>
                 </div>
                 <div className={styles.cartbox}>
-                  <div className={styles.minus} onClick={() => setCount((prev) => (prev == 0 ? 0 : prev-1))}><FaMinus /></div>
-                  <div className={styles.count}>{count}</div>
-                  <div className={styles.plus} onClick={() => setCount((prev) => prev+1)}><FaPlus /></div>
+                  <div className={styles.minus} onClick={() => stopClickingOnAddLessButtons ? "" : lessTocart(item.id._id)}><FaMinus /></div>
+                  <div className={styles.count}>{item.quantity}</div>
+                  <div className={styles.plus} onClick={() => stopClickingOnAddLessButtons ? "" : addTocart(item.id._id)}><FaPlus /></div>
                 </div>
               </div>
             </article>
@@ -52,12 +109,9 @@ function Cart() {
 
         <aside className={styles.cart_right} aria-label="Order summary">
           <h3>Order Summary</h3>
-          <div className={styles.summaryRow}><span>Items total</span><span>₹ 200</span></div>
-          <div className={styles.summaryRow}><span>Items total</span><span>₹ 200</span></div>
-          <div className={styles.summaryRow}><span>Items total</span><span>₹ 200</span></div>
-          <div className={styles.summaryRow}><span>Items total</span><span>₹ 200</span></div>
+          <div className={styles.summaryRow}><span>Items total</span><span>{subtotal}</span></div>
           <div className={styles.summaryRow}><span>Delivery</span><span>₹ 40</span></div>
-          <div className={styles.summaryRow}><strong>Total</strong><strong>₹ {200 + 40}</strong></div>
+          <div className={styles.summaryRow}><strong>Total</strong><strong>₹ {subtotal + 40}</strong></div>
           <button className={styles.checkoutBtn}>Checkout</button>
         </aside>
           </>

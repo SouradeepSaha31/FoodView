@@ -5,12 +5,12 @@ import {Link, useNavigate} from "react-router-dom"
 
 export default function UserRegister() {
     const navigate = useNavigate();
-    let [passwordConditaion, setPasswordCondition] = useState({
-        minChar : false,
-        upperCase : false,
-        lowerCase : false,
-        specialChar : false
-    })
+    // let [passwordConditaion, setPasswordCondition] = useState({
+    //     minChar : false,
+    //     upperCase : false,
+    //     lowerCase : false,
+    //     specialChar : false
+    // })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,8 +22,8 @@ export default function UserRegister() {
             alert("Email is required.");
             return;
         }
-        if (!passwordConditaion.minChar || !passwordConditaion.upperCase || !passwordConditaion.lowerCase || !passwordConditaion.specialChar) {
-            alert("Password does not meet all the requirements.");
+        if (!e.target.password.value) {
+            alert("Password is required.");
             return;
         }
         const data = {
@@ -41,15 +41,15 @@ export default function UserRegister() {
         }
     }
 
-    const ruleChanger = (e) => {
-        const password = e.target.value;
-        setPasswordCondition({
-            minChar : password.length >= 8,
-            upperCase : /[A-Z]/.test(password),
-            lowerCase : /[a-z]/.test(password),
-            specialChar : /[!@#$%^&*(),.?":{}|<>]/.test(password)
-        })
-    }
+    // const ruleChanger = (e) => {
+    //     const password = e.target.value;
+    //     setPasswordCondition({
+    //         minChar : password.length >= 8,
+    //         upperCase : /[A-Z]/.test(password),
+    //         lowerCase : /[a-z]/.test(password),
+    //         specialChar : /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    //     })
+    // }
 
 	return (
         <div className={styles.wraper}>
@@ -71,10 +71,10 @@ export default function UserRegister() {
 
                     <div className={styles.row}>
                         <label htmlFor="password" className={styles.label}>Password</label>
-                        <input id="password" name="password" type="password" className={styles.input} onChange={ruleChanger}/>
+                        <input id="password" name="password" type="password" className={styles.input}/>
                     </div>
 
-                    <div className={styles.passwordprotection}>
+                    {/* <div className={styles.passwordprotection}>
                       <label className={styles.passwordlabel}>Password must contain:</label>
                         <div className={styles.rules}>
                           <label className={styles.rule}>
@@ -94,7 +94,7 @@ export default function UserRegister() {
                             At least 1 special character
                           </label>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className={styles.actions}>
                         <button type="submit" className={styles.btn}>Register</button>

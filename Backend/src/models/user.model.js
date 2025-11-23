@@ -13,6 +13,10 @@ const userSchema =  new mongoose.Schema({
     password : {
         type : String,
         required : true
+    },
+    cartId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "cart"
     }
 },{
     timestamps : true

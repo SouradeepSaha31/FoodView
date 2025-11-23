@@ -16,16 +16,20 @@ function ProtectedRoute({Component, PageName}) {
                 alert("problem in protected route");
             }
         }
-        // verifyUser();
+        verifyUser();
     }, [])
 
-    // if (message.loggedIn && message.user && PageName == "dashboard") {
-    //     return <Component detailes = {message.detailes}/>
-    // } else {
-    //     return <ErrorPage message = "Access denied"/>
-    // }
+    if (PageName == "dashboard") {
+        return <Component detailes = {message.detailes}/>
+    } else if(message.loggedIn && message.user && PageName == "cart"){
+        return <Component detailes = {message.detailes}/>
+    } else if(message.loggedIn && message.user && PageName == "orders"){
+        return <Component detailes = {message.detailes}/>
+    } else {
+        return <ErrorPage message = "Access denied"/>
+    }
 
-    return <Component/>
+    // return <Component/>
 
 }
 
