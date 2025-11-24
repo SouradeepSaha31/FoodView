@@ -3,9 +3,14 @@ import foodModel from "../models/food.model.js"
 import foodPartnerModel from "../models/foodPartner.model.js"
 import userModel from "../models/user.model.js";
 import cartModel from "../models/cart.model.js"
+import orderModel from "../models/order.model.js";
+import subOrderModel from "../models/subOrder.model.js";
 import { foodItemImageUpload } from "../services/storage.service.js"
 import jwt from "jsonwebtoken"
 import { v4 as uuid } from 'uuid';
+import mongoose from "mongoose"
+
+// food partner controllers
 
 const addFood = async (req, res) => {
     try {
@@ -63,6 +68,71 @@ const getFoodForPartner = async (req, res) => {
         })
     }
 }
+const getPartnerOrders = async (req, res) => {
+    try {
+        const {_id} = req.foodPartner
+
+        const orders = await subOrderModel.find({foodPartnerId : _id}).populate("userId").populate("orderItems.id")
+        console.log(orders)
+
+        const dateAndTimeChangedOrder = orders.map((o) => {
+            const date = new Date(o.createdAt);
+    
+            const finalDate = date.toLocaleDateString("en-IN", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+            });
+    
+            const finalTime = date.toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+            });
+            return {
+                _id : o._id,
+                userId : o.userId,
+                foodPartnerId : o.foodPartnerId,
+                userOrderId : o.userOrderId,
+                totalPrice : o.totalPrice,
+                orderItems : o.orderItems,
+                dateAndTime : {
+                    finalDate,
+                    finalTime
+                }
+            }
+        })
+
+        console.log(dateAndTimeChangedOrder)
+
+        res.status(201).json({message : "all orders", orders : dateAndTimeChangedOrder})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message : "error in getPartnerOrders controller", 
+            error
+        })
+    }
+}
+const partnerOrderPopup = async (req, res) => {
+    try {
+
+        let {orderId} = req.params
+        const order = await subOrderModel.findById(orderId).populate("orderItems.id")
+        res.status(201).json({message : "order send", order})
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message : "error in partnerOrderPopup controller", 
+            error
+        })
+    }
+}
+
+
+// user controllers
 
 const getFood = async (req, res) => {
     try {
@@ -178,7 +248,7 @@ const lessToCart = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            message : "error in addTocart controller",
+            message : "error in lessTocart controller",
             error
         })
     }
@@ -197,10 +267,136 @@ const getCartItems = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            message : "error in addTocart controller",
+            message : "error in getCartItems controller",
+            error
+        })
+    }
+}
+const placeOrder = async (req, res) => {
+    try {
+
+        let {_id} = req.normalUser
+        let {userSubtotal, delivaryChagre} = req.body
+        const totalPrice = userSubtotal + delivaryChagre
+
+        const cart = await cartModel.findOne({userId : _id})
+        const newOrder = await orderModel.create({
+            userId : _id,
+            totalPrice,
+            orderItems : cart.foodItems
+        })
+        const findNewOeder = await orderModel.findById(newOrder._id).populate("orderItems.id")
+        const foodPartnerIdList = findNewOeder.orderItems.map((f) => {
+            return f.id.foodPartner.toString()
+        })
+        const sortedFoodPartnerIdList = Array.from(new Set(foodPartnerIdList))
+
+        sortedFoodPartnerIdList.forEach( async (fId) => {
+            let subOrderItem = []
+            findNewOeder.orderItems.forEach((eachItem) => {
+            if (fId == eachItem.id.foodPartner.toString()){
+                subOrderItem.push(eachItem)
+            }
+            })
+            console.log(subOrderItem)
+            const subTotal = subOrderItem.reduce((acc, curr) => acc + (curr.id.price * curr.quantity), 0)
+            const subDelivaryCharge = delivaryChagre/sortedFoodPartnerIdList.length
+            const subOrder = await subOrderModel.create({
+                userId : findNewOeder.userId,
+                foodPartnerId : new mongoose.Types.ObjectId(fId),
+                userOrderId : findNewOeder._id,
+                totalPrice : subTotal + subDelivaryCharge,
+                orderItems : subOrderItem
+            })
+
+        })
+
+        cart.foodItems = []
+        cart.save()
+
+        res.status(201).json({message : "order placed successfully"})
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message : "error in placeOrder controller",
+            error
+        })
+    }
+}
+const getOrders = async (req, res) => {
+    try {
+
+        let {_id} = req.normalUser
+
+        const orders = await orderModel.find({userId : _id}).populate("orderItems.id")
+        // console.log(orders)
+
+        const dateAndTimeChangedOrder = orders.map((o) => {
+            const date = new Date(o.createdAt);
+    
+            const finalDate = date.toLocaleDateString("en-IN", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+            });
+    
+            const finalTime = date.toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+            });
+            return {
+                _id : o._id,
+                userId : o.userId,
+                totalPrice : o.totalPrice,
+                orderItems : o.orderItems,
+                dateAndTime : {
+                    finalDate,
+                    finalTime
+                }
+            }
+        })
+
+        console.log(dateAndTimeChangedOrder)
+
+        res.status(201).json({message : "all orders", orders : dateAndTimeChangedOrder})
+
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message : "error in placeOrder controller",
+            error
+        })
+    }
+}
+const ordersPopup = async (req, res) => {
+    try {
+        let {orderId} = req.params
+        const order = await orderModel.findById(orderId).populate("orderItems.id")
+        res.status(201).json({message : "order send", order})
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message : "error in ordersPopup controller",
             error
         })
     }
 }
 
-export {addFood, getFood, getFoodForPartner, addToCart, lessToCart, getCartItems}
+export {
+    addFood, 
+    getFoodForPartner, 
+    getPartnerOrders,
+    partnerOrderPopup,
+    getFood, 
+    addToCart, 
+    lessToCart, 
+    getCartItems, 
+    placeOrder, 
+    getOrders, 
+    ordersPopup
+}

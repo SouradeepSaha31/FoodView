@@ -21,6 +21,10 @@ function ProtectedRoute({Component, PageName}) {
 
     if (message.loggedIn && message.foodPartner && PageName == "partnerprofile") {
         return <Component detailes = {message.detailes}/>
+    } else if (message.loggedIn && message.foodPartner && PageName == "createfood") {
+        return <Component detailes = {message.detailes}/>
+    } else if (message.loggedIn && message.foodPartner && PageName == "orders") {
+        return <Component detailes = {message.detailes}/>
     } else {
         return <ErrorPage message = "Access denied"/>
     }

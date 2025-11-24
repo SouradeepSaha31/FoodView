@@ -18,6 +18,10 @@ export default function UserRegister() {
             alert("Fullname is required.");
             return;
         }
+        if (!e.target.address.value) {
+            alert("Address is required.");
+            return;
+        }
         if (!e.target.email.value) {
             alert("Email is required.");
             return;
@@ -28,6 +32,7 @@ export default function UserRegister() {
         }
         const data = {
             fullname: e.target.fullname.value,
+            address: e.target.address.value,
             email: e.target.email.value,
             password: e.target.password.value
         }
@@ -62,6 +67,11 @@ export default function UserRegister() {
                     <div className={styles.row}>
                         <label htmlFor="fullname" className={styles.label}>Name</label>
                         <input id="fullname" name="fullname" type="text" className={styles.input} />
+                    </div>
+
+                    <div className={styles.row}>
+                        <label htmlFor="address" className={styles.label}>Address</label>
+                        <input id="address" name="address" type="text" className={styles.input} />
                     </div>
 
                     <div className={styles.row}>

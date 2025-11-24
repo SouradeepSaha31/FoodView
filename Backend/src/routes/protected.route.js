@@ -8,7 +8,7 @@ protectedRouter.route('/').get(async (req, res) => {
   const token = req.cookies.token;
   if (token) {
     const decoded = jwt.verify(token, process.env.TOKEN_CODE);
-    const user = await userModel.findById(decoded._id).populate("cartId")
+    const user = await userModel.findById(decoded._id)
     if (user) {
       return res.status(200).json({ message : {
         loggedIn: true, 
@@ -18,7 +18,6 @@ protectedRouter.route('/').get(async (req, res) => {
           _id : user._id,
           fullname : user.fullname, 
           email : user.email,
-          cart : user.cartId
         }
       } });
     } else {

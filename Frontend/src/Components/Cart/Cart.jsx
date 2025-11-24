@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import styles from "./Cart.module.css"
 import baseUrl from "../../BaseUrl/BaseUrl.js"
 import { FaPlus, FaMinus } from "react-icons/fa6";
 
 
 function Cart() {
+  const navigate = useNavigate()
   let [cartItems, setCartItems] = useState([])
   let [stopClickingOnAddLessButtons, setStopClickingOnAddLessButtons] = useState(false);
 
@@ -14,7 +16,7 @@ function Cart() {
             console.log("hi")
               const response = await baseUrl.get("/api/food/getcartitems", {withCredentials: true});
               console.log("hello")
-              console.log(response.data);
+              console.log(response.data.cartItems);
               setCartItems(response.data.cartItems);
           } catch (error) {
               console.log(error.response.data.message);
@@ -57,23 +59,38 @@ function Cart() {
             alert(error.response.data.message)
             setStopClickingOnAddLessButtons(false)
       }
+  }
+
+  const userSubtotal = cartItems.reduce((acc, curr) => acc + (curr.id.price * curr.quantity), 0)
+  const delivaryChagre = 40
+  const totalPrice = userSubtotal + delivaryChagre
+
+  const placedOrder = async (userSubtotal, delivaryChagre) => {
+
+      try {
+        const response = await baseUrl.post("/api/food/placeorder", {userSubtotal, delivaryChagre})
+        navigate("/orders")
+        
+      } catch (error) {
+        console.log(error)
+        alert(error.response.data.message)
+      }
     }
+    
 
 
 
-  const items = [
-    { id: 1, title: 'Chicken Biriyani', price: 300, img: 'https://placehold.co/300x300?text=Biriyani' },
-    { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-    { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-    { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-    { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-    { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-    { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-  ]
-      const [count, setCount] = useState(0)
+  // const items = [
+  //   { id: 1, title: 'Chicken Biriyani', price: 300, img: 'https://placehold.co/300x300?text=Biriyani' },
+  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
+  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
+  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
+  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
+  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
+  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
+  // ]
   
 
-  const subtotal = cartItems.reduce((acc, curr) => acc + (curr.id.price * curr.quantity), 0)
 
   return (
     <div className={styles.cart}>
@@ -109,10 +126,10 @@ function Cart() {
 
         <aside className={styles.cart_right} aria-label="Order summary">
           <h3>Order Summary</h3>
-          <div className={styles.summaryRow}><span>Items total</span><span>{subtotal}</span></div>
-          <div className={styles.summaryRow}><span>Delivery</span><span>₹ 40</span></div>
-          <div className={styles.summaryRow}><strong>Total</strong><strong>₹ {subtotal + 40}</strong></div>
-          <button className={styles.checkoutBtn}>Checkout</button>
+          <div className={styles.summaryRow}><span>Items total</span><span>{userSubtotal}</span></div>
+          <div className={styles.summaryRow}><span>Delivery</span><span>₹ {delivaryChagre}</span></div>
+          <div className={styles.summaryRow}><strong>Total</strong><strong>₹ {totalPrice}</strong></div>
+          <button className={styles.checkoutBtn} onClick={() => placedOrder(userSubtotal, delivaryChagre)}>Checkout</button>
         </aside>
           </>
         )

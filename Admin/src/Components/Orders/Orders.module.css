@@ -54,6 +54,24 @@
     cursor: pointer;
 }
 
+.orderCard .address{
+    font-size: 1rem;
+    font-weight: 400;
+}
+.orderCard .name{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.orderCard .dateandtime{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.orderCard .total {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 .imgdiv{
     width: 100%;
     min-height: 80px;

@@ -6,10 +6,7 @@ import { FaPlus, FaMinus } from "react-icons/fa6";
 
 
 
-function Dashboard({detailes}) {
-    // console.log(detailes)
-    // console.log(detailes.cart.foodItems)
-    // const navigate = useNavigate();
+function Dashboard() {
     let [foods, setFoods] = useState([]);
     let [cart, setCart] = useState([]);
     let [stopClickingOnAddLessButtons, setStopClickingOnAddLessButtons] = useState(false);

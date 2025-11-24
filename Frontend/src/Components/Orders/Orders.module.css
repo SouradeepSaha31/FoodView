@@ -54,6 +54,20 @@
     cursor: pointer;
 }
 
+.orderCard .date{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.orderCard .time{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.orderCard .total {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 .imgdiv{
     width: 100%;
     min-height: 80px;
