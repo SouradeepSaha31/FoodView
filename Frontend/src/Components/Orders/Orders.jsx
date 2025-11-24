@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import styles from "./Orders.module.css"
 import { RxCross2 } from "react-icons/rx";
 import baseUrl from '../../BaseUrl/BaseUrl';
+import Loader from "../Loader/Loader.jsx"
 
 
 function Orders() {
@@ -9,14 +10,17 @@ function Orders() {
     let [singleOrder, setSingleOrder] = useState([])
     let [toggle, setToggle] = useState(true)
     let [stopClickingOnOrders, setStopClickingOnOrders] = useState(false)
+    let [loaderToggle, setLoaderToggle] = useState(true)
 
     const fetchOrders = async () => {
           try {
+              setLoaderToggle(true)
               console.log("hi")
               const response = await baseUrl.get("/api/food/getorders", {withCredentials: true});
               console.log("hello")
               console.log(response.data);
               setOrders(response.data.orders);
+              setLoaderToggle(false)
           } catch (error) {
               console.log(error.response.data.message);
               console.log(error);
@@ -30,14 +34,15 @@ function Orders() {
 
   const orderPopup = async (orderId) => {
     try {
+      setLoaderToggle(true)
       setStopClickingOnOrders(true)
       console.log(orderId)
       const response = await baseUrl.post(`/api/food/orderpopup/${orderId}`, {withCredentials: true});
       console.log(response.data)
-      setSingleOrder(response.data.order.orderItems)
+      setSingleOrder(response.data.order.orderItems.reverse())
       setToggle(false)
       setStopClickingOnOrders(false)
-      
+      setLoaderToggle(false)
     } catch (error) {
       console.log(error)
       alert(error.response.data.message)
@@ -49,18 +54,12 @@ function Orders() {
   const totalPrice = userSubtotal + delivaryChagre
   
 
-  const items = Array.from("4444444")
-  let img = [
-    "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=465&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=410&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  ]
-
 
   return (
     <>
         <div className={styles.orders}>
+          {/* Loader */}
+          <Loader show = {loaderToggle}/>
           {/* popup container */}
           <div className={styles.popup} style={{display : toggle ? "none" : "block"}} >
             <div className={styles.content}>
@@ -101,7 +100,7 @@ function Orders() {
           <div className={styles.container}>
             {
               orders.length === 0 ? (
-                <h2 className={styles.noorder}>No orders placed yet.</h2>
+                <h2 className={styles.noorder} style={{display : !loaderToggle ? "block" : "none"}}>No orders placed yet.</h2>
               ) : (
                 orders.map((item, index) => (
                   <>

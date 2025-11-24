@@ -4,18 +4,25 @@ import baseUrl from "../../BaseUrl/BaseUrl.js";
 import styles from "./PartnerProfile.module.css";
 import { IoIosAdd } from "react-icons/io";
 import { IoCamera } from "react-icons/io5";
+import Loader from "../Loader/Loader.jsx";
 
 
 
 function PartnerProfile({detailes}) {
   let [foods, setFoods] = useState([]);
+  let [toggle, setToggle] = useState(false);
+  let [imgShowInFrontendToggle, setImgShowInFrontendToggle] = useState(false);
+  let [imageURL, setImageURL] = useState();
+  let [loderToggle, setLoderToggle] = useState(true);
 
   useEffect(() => {
         const fetchfoods = async () => {
             try {
+                setLoderToggle(true)
                 const response = await baseUrl.get(`/api/food/getfoodforpartner`,{withCredentials : true} );
                 setFoods(response.data.foods);
                 console.log(response.data.foods)
+                setLoderToggle(false)
             } catch (error) {
                 console.log(error.response.data.message);
                 console.log(error);
@@ -24,21 +31,6 @@ function PartnerProfile({detailes}) {
         };
         fetchfoods();
     }, []);
-
-  
-  let demoFoods = [
-    { id: 1, title: 'Chicken Biryani', price: 300, description: 'Fragrant basmati rice with tender chicken.', image: 'https://placehold.co/400x300?text=Biryani' },
-    { id: 2, title: 'Paneer Butter Masala', price: 220, description: 'Creamy tomato gravy with soft paneer cubes.', image: 'https://placehold.co/400x300?text=Paneer' },
-    { id: 3, title: 'Masala Dosa', price: 120, description: 'Crispy dosa with spiced potato filling.', image: 'https://placehold.co/400x300?text=Dosa' },
-    { id: 4, title: 'Gulab Jamun', price: 80, description: 'Soft milk dumplings soaked in syrup.', image: 'https://placehold.co/400x300?text=Sweet' },
-    { id: 5, title: 'Fish Curry', price: 350, description: 'Tangy, spicy coastal-style fish curry.', image: 'https://placehold.co/400x300?text=Fish' },
-    { id: 6, title: 'Veg Pulao', price: 190, description: 'Aromatic rice with seasonal vegetables.', image: 'https://placehold.co/400x300?text=Pulao' }
-  ]
-
-  let [toggle, setToggle] = useState(false);
-  let [imgShowInFrontendToggle, setImgShowInFrontendToggle] = useState(false);
-  let [imageURL, setImageURL] = useState();
-  let [loderToggle, setLoderToggle] = useState(false);
 
     const showFoodImageInFrontend = (e) => {
       e.preventDefault()
@@ -95,9 +87,7 @@ function PartnerProfile({detailes}) {
     <>
       <div className={styles.profile}>
         {/* loader */}
-        <div className={styles.loaderContainer} style={{display : loderToggle ? "flex" : "none"}}>
-          <div className={styles.loader}></div>
-        </div>
+        <Loader show = {loderToggle}/>
         {/* popup for add food item */}
         <div className={styles.popup} style={{display : toggle ? "block" : "none"}}>
           <form className={styles.popupContainer} encType="multipart/form-data" onSubmit={sendFood}>
@@ -116,8 +106,8 @@ function PartnerProfile({detailes}) {
             </div>
             <textarea type="text" name="description" className={styles.description} placeholder="Add a Description"></textarea>
             <div className={styles.buttons}>
-              <button className={styles.close} onClick={() => setToggle(false)}>Close</button>
-              <button type="submit" className={styles.add} style={{display : loderToggle ? "none" : "block"}}>Add</button>
+              <div className={styles.close} onClick={() => setToggle(false)}>Close</div>
+              <button type="submit" className={styles.add}>Add</button>
             </div>
           </form>
         </div>

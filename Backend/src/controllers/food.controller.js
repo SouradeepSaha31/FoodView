@@ -57,7 +57,7 @@ const getFoodForPartner = async (req, res) => {
         const foods = await foodModel.find({foodPartner : id})
         res.status(201).json({
             message : "Here are the all food items",
-            foods
+            foods : foods.reverse()
         })
         
     } catch (error) {
@@ -96,7 +96,7 @@ const getPartnerOrders = async (req, res) => {
                 foodPartnerId : o.foodPartnerId,
                 userOrderId : o.userOrderId,
                 totalPrice : o.totalPrice,
-                orderItems : o.orderItems,
+                orderItems : o.orderItems.reverse(),
                 dateAndTime : {
                     finalDate,
                     finalTime
@@ -106,7 +106,7 @@ const getPartnerOrders = async (req, res) => {
 
         console.log(dateAndTimeChangedOrder)
 
-        res.status(201).json({message : "all orders", orders : dateAndTimeChangedOrder})
+        res.status(201).json({message : "all orders", orders : dateAndTimeChangedOrder.reverse()})
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -142,7 +142,7 @@ const getFood = async (req, res) => {
         if(!req.cookies.token){
             res.status(201).json({
                 message : "Here are the all food items",
-                allFoods : foods,
+                allFoods : foods.reverse(),
                 cart : []
             })
         } else {
@@ -150,14 +150,14 @@ const getFood = async (req, res) => {
             const user = await userModel.findById(data._id).populate("cartId")
             res.status(201).json({
                 message : "Here are the all food items",
-                allFoods : foods,
+                allFoods : foods.reverse(),
                 cart : user.cartId.foodItems
             })
         }
 
         res.status(201).json({
             message : "Here are the all food items",
-            allFoods : foods
+            allFoods : foods.reverse()
         })
         
     } catch (error) {
@@ -262,7 +262,7 @@ const getCartItems = async (req, res) => {
         const cart = await cartModel.findOne({userId : _id}).populate("foodItems.id")
         console.log(cart)
 
-        res.status(201).json({message : "all cart items", cartItems : cart.foodItems})
+        res.status(201).json({message : "all cart items", cartItems : cart.foodItems.reverse()})
         
     } catch (error) {
         console.log(error)
@@ -351,7 +351,7 @@ const getOrders = async (req, res) => {
                 _id : o._id,
                 userId : o.userId,
                 totalPrice : o.totalPrice,
-                orderItems : o.orderItems,
+                orderItems : o.orderItems.reverse(),
                 dateAndTime : {
                     finalDate,
                     finalTime
@@ -361,7 +361,7 @@ const getOrders = async (req, res) => {
 
         console.log(dateAndTimeChangedOrder)
 
-        res.status(201).json({message : "all orders", orders : dateAndTimeChangedOrder})
+        res.status(201).json({message : "all orders", orders : dateAndTimeChangedOrder.reverse()})
 
         
     } catch (error) {

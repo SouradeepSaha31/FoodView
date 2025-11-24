@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import styles from "./Dashboard.module.css"
 import baseUrl from "../../BaseUrl/BaseUrl.js"
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import Loader from "../Loader/Loader.jsx"
 
 
 
@@ -10,14 +11,17 @@ function Dashboard() {
     let [foods, setFoods] = useState([]);
     let [cart, setCart] = useState([]);
     let [stopClickingOnAddLessButtons, setStopClickingOnAddLessButtons] = useState(false);
+    let [loaderToggle, setLoaderToggle] = useState(true);
 
     useEffect(() => {
         const fetchfoods = async () => {
             try {
+                setLoaderToggle(true)
                 const response = await baseUrl.get("/api/food/getfood", {withCredentials: true});
                 setFoods(response.data.allFoods);
                 setCart(response.data.cart)
                 console.log(response.data)
+                setLoaderToggle(false)
             } catch (error) {
                 console.log(error.response.data.message);
                 console.log(error);
@@ -65,6 +69,8 @@ function Dashboard() {
         return (
             <>
                 <div className={styles.dashboard}>
+                    {/* Loader */}
+                    <Loader show = {loaderToggle}/>
                     <div className={styles.container}>
                         {foods.map((food, index) => (
                             <div key={index} className={styles.food_card}>

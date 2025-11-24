@@ -3,21 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import styles from "./Cart.module.css"
 import baseUrl from "../../BaseUrl/BaseUrl.js"
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import Loader from "../Loader/Loader.jsx"
 
 
 function Cart() {
   const navigate = useNavigate()
   let [cartItems, setCartItems] = useState([])
   let [stopClickingOnAddLessButtons, setStopClickingOnAddLessButtons] = useState(false);
+  let [loaderToggle, setLoaderToggle] = useState(true)
 
   
   const fetchCartItems = async () => {
           try {
-            console.log("hi")
+              setLoaderToggle(true)
+              console.log("hi")
               const response = await baseUrl.get("/api/food/getcartitems", {withCredentials: true});
               console.log("hello")
               console.log(response.data.cartItems);
               setCartItems(response.data.cartItems);
+              setLoaderToggle(false)
           } catch (error) {
               console.log(error.response.data.message);
               console.log(error);
@@ -68,7 +72,9 @@ function Cart() {
   const placedOrder = async (userSubtotal, delivaryChagre) => {
 
       try {
+        setLoaderToggle(true)
         const response = await baseUrl.post("/api/food/placeorder", {userSubtotal, delivaryChagre})
+        setLoaderToggle(false)
         navigate("/orders")
         
       } catch (error) {
@@ -80,24 +86,17 @@ function Cart() {
 
 
 
-  // const items = [
-  //   { id: 1, title: 'Chicken Biriyani', price: 300, img: 'https://placehold.co/300x300?text=Biriyani' },
-  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-  //   { id: 2, title: 'Veg Thali', price: 180, img: 'https://placehold.co/300x300?text=Thali' },
-  // ]
   
 
 
   return (
     <div className={styles.cart}>
+      {/* Loader */}
+      <Loader show = {loaderToggle}/>
       <div className={styles.cart__inner}>
         {
         cartItems.length === 0 ? (
-          <div className={styles.emptyCart} role="alert">
+          <div className={styles.emptyCart} style={{display : !loaderToggle ? "block" : "none"}}   role="alert">
             Your cart is empty.
           </div>
         ) : (
