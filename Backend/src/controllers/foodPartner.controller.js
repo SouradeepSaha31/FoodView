@@ -63,7 +63,7 @@ const register = async (req, res) => {
         // generating token
 
         const token = jwt.sign({_id : user._id, email : user.email}, process.env.TOKEN_CODE)
-        res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none"})
+        res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none", maxAge: 1000 * 60 * 60 * 24 * 7})
 
         // sending response
 
@@ -114,7 +114,7 @@ const login = async (req, res) => {
         // generating token
 
         const token = jwt.sign({_id : isUserFound._id, email : isUserFound.email}, process.env.TOKEN_CODE)
-        res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none"})
+        res.cookie("token", token, {httpOnly : true, secure : true, sameSite : "none", maxAge: 1000 * 60 * 60 * 24 * 7})
 
         // sending response
 

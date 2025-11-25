@@ -17,6 +17,7 @@ function ProtectedRoute({Component, PageName}) {
                 setLoaderToggle(false)
             } catch (error) {
                 console.log(error)
+                setLoaderToggle(false)
                 alert("problem in protected route");
             }
         }
